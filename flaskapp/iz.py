@@ -33,6 +33,9 @@ class NetForm(FlaskForm):
  # и указывает пользователю ввести данные если они не введены
  # или неверны
  cho = StringField('1-поменять правую и левую часть,2-поменять верхнюю и нижнюю часть', validators = [DataRequired()])
+ rcolor = StringField('choose level of red intensity (0.0 - 1)', validators = [DataRequired()])
+ gcolor = StringField('choose level of green intensity (0.0 - 1)', validators = [DataRequired()])
+ bcolor = StringField('choose level of blue intensity (0.0 - 1)', validators = [DataRequired()])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
  upload = FileField('Load image', validators=[
@@ -54,11 +57,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 ## функция для оброботки изображения 
-def draw(filename,cho):
+def draw(filename,cho,rcolor,gcolor,bcolor):
  ##открываем изображение 
  print(filename)
  img= Image.open(filename)
  x, y = img.size
+ rcolor = float(rcolor)
+ gcolor = float(gcolor)
+ bcolor = float(bcolor)
  cho=int(cho)
  
 ##делаем график
@@ -93,6 +99,10 @@ def draw(filename,cho):
   img.save(output_filename)
  return output_filename,gr_path
 
+img[size/2,:,0] = rcolor
+img[size/2:,:,1] = gcolor
+img[size/2:,:,2] = bcolor
+
 # метод обработки запроса GET и POST от клиента
 @app.route("/net",methods=['GET', 'POST'])
 def net():
@@ -109,7 +119,7 @@ def net():
   ch=form.cho.data
  
   form.upload.data.save(filename)
-  newfilename,grname = draw(filename,ch)
+  newfilename,grname = draw(filename,ch,rcolor,gcolor,bcolor)
  # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
  # сети если был нажат сабмит, либо передадим falsy значения
  
