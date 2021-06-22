@@ -84,8 +84,7 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
  img[x/2,:,0] = rcolor
  img[x/2:,:,1] = gcolor
  img[x/2:,:,2] = bcolor
- img = Image.fromarray(data, 'RGB')
-
+ 
 ##меняем половинки картинок по выбору
  if cho==1: 
   a = img.crop((0, 0, int(y * 0.5), x))
