@@ -99,9 +99,9 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
   img.save(output_filename)
  return output_filename,gr_path
 
-img[size/2,:,0] = rcolor
-img[size/2:,:,1] = gcolor
-img[size/2:,:,2] = bcolor
+ img[size/2,:,0] = rcolor
+ img[size/2:,:,1] = gcolor
+ img[size/2:,:,2] = bcolor
 
 # метод обработки запроса GET и POST от клиента
 @app.route("/net",methods=['GET', 'POST'])
