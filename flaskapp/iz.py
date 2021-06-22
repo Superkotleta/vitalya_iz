@@ -79,6 +79,12 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
  #plt.show()
  plt.savefig(gr_path)
  plt.close()
+ 
+ img= np.array
+ img[x/2,:,0] = rcolor
+ img[x/2:,:,1] = gcolor
+ img[x/2:,:,2] = bcolor
+ img = Image.fromarray(data, 'RGB')
 
 ##меняем половинки картинок по выбору
  if cho==1: 
@@ -86,11 +92,7 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
   b = img.crop((int(y * 0.5), 0, x, y))
   img.paste(b, (0, 0))
   img.paste(a, (int(x * 0.5), 0))
-  img= np.array
-  img[x/2,:,0] = rcolor
-  img[x/2:,:,1] = gcolor
-  img[x/2:,:,2] = bcolor
-  img = Image.fromarray(data, 'RGB')
+
   output_filename = filename
   img.save(output_filename)
  else:
@@ -100,11 +102,7 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
   img.paste(b, (0, 0))
   img.paste(a, (int(y * 0.5), 0))
   img=img.rotate(270)
-  img= np.array
-  img[x/2,:,0] = rcolor
-  img[x/2:,:,1] = gcolor
-  img[x/2:,:,2] = bcolor
-  img = Image.fromarray(data, 'RGB')
+
   output_filename = filename
   img.save(output_filename)
  return output_filename,gr_path
