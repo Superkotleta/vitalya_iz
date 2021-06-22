@@ -117,9 +117,13 @@ def net():
   # файлы с изображениями читаются из каталога static
   filename = os.path.join('./static', secure_filename(form.upload.data.filename))
   ch=form.cho.data
+  sr=form.rcolor.data
+  sg=form.gcolor.data
+  sb=form.bcolor.data
+ 
  
   form.upload.data.save(filename)
-  newfilename,grname = draw(filename,ch,rcolor,gcolor,bcolor)
+  newfilename,grname = draw(filename,ch,sr,sg,sb)
  # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
  # сети если был нажат сабмит, либо передадим falsy значения
  
