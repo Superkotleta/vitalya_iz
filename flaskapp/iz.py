@@ -80,11 +80,9 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
  plt.savefig(gr_path)
  plt.close()
  
- img= np.array
  img[x//2,:,0] = rcolor
  img[x//2:,:,1] = gcolor
  img[x//2:,:,2] = bcolor
- img = Image.fromarray((img * 255).astype(np.uint8))
  
 ##меняем половинки картинок по выбору
  if cho==1: 
