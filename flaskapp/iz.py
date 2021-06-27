@@ -87,9 +87,9 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
   img.paste(b, (0, 0))
   img.paste(a, (int(x * 0.5), 0))
   img= np.array(img)
-  img[x//2:,:,0] = rcolor
-  img[x//2:,:,1] = gcolor
-  img[x//2:,:,2] = bcolor
+  img[x//2,::,0] = rcolor
+  img[x//2:,::,1] = gcolor
+  img[x//2:,::,2] = bcolor
   img = Image.fromarray((img * 255).astype(np.uint8))
   output_filename = filename
   img.save(output_filename)
@@ -101,9 +101,9 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
   img.paste(a, (int(y * 0.5), 0))
   img=img.rotate(270)
   img= np.array(img)
-  img[x//2,:,0] = rcolor
-  img[x//2,:,1] = gcolor
-  img[x//2,:,2] = bcolor
+  img[x//2,::,0] = rcolor
+  img[x//2:,::,1] = gcolor
+  img[x//2:,::,2] = bcolor
   img = Image.fromarray((img * 255).astype(np.uint8), 'RGB')
   output_filename = filename
   img.save(output_filename)
