@@ -104,7 +104,7 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
   img[x//2,:,0] = rcolor
   img[x//2,:,1] = gcolor
   img[x//2,:,2] = bcolor
-  img = Image.fromarray((img * 255).astype(np.uint8))
+  img = Image.fromarray(img, 'RGB')
   output_filename = filename
   img.save(output_filename)
  return output_filename,gr_path
