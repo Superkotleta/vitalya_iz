@@ -80,7 +80,7 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
  plt.savefig(gr_path)
  plt.close()
  
- img= np.array
+ img= np.array(img)
  img[x//2,:,0] = rcolor
  img[x//2:,:,1] = gcolor
  img[x//2:,:,2] = bcolor
