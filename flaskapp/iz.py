@@ -5,10 +5,10 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
  return " <html><head></head> <body> Hello World! </body></html>"
-
+ 
 from flask import render_template
 #наша новая функция сайта
-
+ 
 # модули работы с формами и полями в формах
 from flask_wtf import FlaskForm,RecaptchaField
 from wtforms import StringField, SubmitField, TextAreaField
@@ -50,12 +50,12 @@ class NetForm(FlaskForm):
 # для устранения в имени символов типа / и т.д.
 from werkzeug.utils import secure_filename
 import os
-
+ 
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+ 
 ## функция для оброботки изображения 
 def draw(filename,cho,rcolor,gcolor,bcolor):
  ##открываем изображение 
@@ -80,9 +80,11 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
  plt.savefig(gr_path)
  plt.close()
  
+ img= np.array
  img[x//2,:,0] = rcolor
  img[x//2:,:,1] = gcolor
  img[x//2:,:,2] = bcolor
+ img = Image.fromarray((img * 255).astype(np.uint8))
  
 ##меняем половинки картинок по выбору
  if cho==1: 
@@ -90,7 +92,7 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
   b = img.crop((int(y * 0.5), 0, x, y))
   img.paste(b, (0, 0))
   img.paste(a, (int(x * 0.5), 0))
-
+ 
   output_filename = filename
   img.save(output_filename)
  else:
@@ -100,12 +102,12 @@ def draw(filename,cho,rcolor,gcolor,bcolor):
   img.paste(b, (0, 0))
   img.paste(a, (int(y * 0.5), 0))
   img=img.rotate(270)
-
+ 
   output_filename = filename
   img.save(output_filename)
  return output_filename,gr_path
-
-
+ 
+ 
 # метод обработки запроса GET и POST от клиента
 @app.route("/net",methods=['GET', 'POST'])
 def net():
@@ -131,7 +133,7 @@ def net():
  # сети если был нажат сабмит, либо передадим falsy значения
  
  return render_template('net.html',form=form,image_name=newfilename,gr_name=grname)
-
-
+ 
+ 
 if __name__ == "__main__":
  app.run(host='127.0.0.1',port=5000)
